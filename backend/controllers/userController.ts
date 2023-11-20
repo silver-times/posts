@@ -2,12 +2,32 @@ import { prisma } from "../config/database";
 import { Request, Response } from "express";
 import { hash, compare } from "bcryptjs";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 
-dotenv.config();
+const generateAccessToken = (user: any) => {
+  return jwt.sign(
+    {
+      id: user.id,
+      email: user.email,
+    },
+    process.env.JWT_SECRET as string,
+    { expiresIn: "1h" }
+  );
+};
+
+const generateRefreshToken = (user: any) => {
+  return jwt.sign(
+    {
+      id: user.id,
+      email: user.email,
+    },
+    process.env.REFRESH_TOKEN_SECRET as string,
+    { expiresIn: "7d" }
+  );
+};
 
 export const signup = async (req: Request, res: Response) => {
   const { email, firstName, lastName, password } = req.body;
+  let user;
 
   try {
     const existingUser = await prisma.user.findUnique({
@@ -22,7 +42,7 @@ export const signup = async (req: Request, res: Response) => {
 
     const hashedPassword = await hash(password, 12);
 
-    const user = await prisma.user.create({
+    user = await prisma.user.create({
       data: {
         email,
         firstName,
@@ -31,18 +51,21 @@ export const signup = async (req: Request, res: Response) => {
       },
     });
 
-    const token = jwt.sign(
-      {
-        id: user.id,
-        email: user.email,
+    const accessToken = generateAccessToken(user);
+    const refreshToken = generateRefreshToken(user);
+
+    user = await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        accessToken,
+        refreshToken,
       },
-      process.env.JWT_SECRET as string,
-      { expiresIn: "1h" }
-    );
-    res.status(201).json({ user, token });
+    });
+
+    res.status(201).json({ user });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Something went wrong" });
+    res.status(500).json({ error: "Failed to create user" });
   }
 };
 
@@ -54,64 +77,41 @@ export const login = async (req: Request, res: Response) => {
         email,
       },
     });
-
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-
     const matchPassword = await compare(password, user.password);
-
     if (!matchPassword) {
-      return res.status(401).json({ error: "Unauthorized" });
+      return res.status(401).json({ error: "Invalid credentials" });
     }
-
-    const token = jwt.sign(
-      {
-        id: user.id,
-        email: user.email,
-      },
-      process.env.JWT_SECRET as string,
-      { expiresIn: "1h" }
-    );
-
-    res.status(201).json({ user, token });
+    const accessToken = generateAccessToken(user);
+    res.status(201).json({ user, accessToken });
   } catch (error) {
-    res.status(500).json({ error: "Something went wrong" });
+    res.status(500).json({ error: "Failed to authenticate user during Login" });
   }
 };
 
 export const refreshToken = async (req: Request, res: Response) => {
-  const { token } = req.body;
-
-  if (!token) {
-    return res.status(403).json({ error: "Access denied, token missing!" });
-  }
-
+  const { refreshToken: refreshTokenFromRequest } = req.body;
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
+    const decoded = jwt.verify(
+      refreshTokenFromRequest,
+      process.env.REFRESH_TOKEN_SECRET as string
+    ) as { id: number; email: string };
 
     const user = await prisma.user.findUnique({
       where: {
-        id: (decoded as any).id,
+        id: decoded.id.toString(),
       },
     });
-
     if (!user) {
-      return res.status(404).json({ error: "No user found" });
+      return res.status(401).json({ error: "Invalid refresh token" });
     }
 
-    const newToken = jwt.sign(
-      {
-        id: user.id,
-        email: user.email,
-      },
-      process.env.JWT_SECRET as string,
-      { expiresIn: "1h" }
-    );
-
-    res.status(200).json({ user, token: newToken });
+    const newAccessToken = generateAccessToken(user);
+    res.json({ accessToken: newAccessToken });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Something went wrong" });
+    res.status(401).json({ error: "Invalid refresh token" });
   }
 };
