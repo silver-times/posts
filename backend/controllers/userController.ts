@@ -92,7 +92,7 @@ export const login = async (req: Request, res: Response) => {
 };
 
 export const refreshToken = async (req: Request, res: Response) => {
-  const { refreshToken: refreshTokenFromRequest } = req.body;
+  const { token: refreshTokenFromRequest } = req.body;
   try {
     const decoded = jwt.verify(
       refreshTokenFromRequest,
