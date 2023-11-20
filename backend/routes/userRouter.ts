@@ -3,10 +3,10 @@ import { signup, login, refreshToken } from "../controllers/userController";
 
 const userRouter = express.Router();
 
-userRouter.post("/auth/signup", signup);
+userRouter.post("/signup", signup);
 
-userRouter.post("/auth/login", login);
+userRouter.post("/login", login);
 
-userRouter.post("/auth/refresh-token", refreshToken);
+userRouter.post("/refresh-token", refreshToken);
 
 export default userRouter;

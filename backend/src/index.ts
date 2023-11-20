@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import userRouter from "../routes/userRouter";
+import postRouter from "../routes/postRouter";
 
 const app = express();
 
@@ -9,6 +11,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello World !");
 });
+
+app.use("/auth", userRouter);
+app.use("/posts", postRouter);
 
 app.listen(5000, async () => {
   try {

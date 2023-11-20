@@ -3,6 +3,7 @@ import { auth } from "../middlewares/auth";
 import {
   getAllPosts,
   getSinglePost,
+  getPostOfSpecificUser,
   createPost,
 } from "../controllers/postController";
 
@@ -10,12 +11,12 @@ const postRouter = express.Router();
 
 postRouter.use(auth);
 
-postRouter.get("/posts", getAllPosts);
+postRouter.get("/", getAllPosts);
 
-postRouter.post("/posts", createPost);
+postRouter.post("/", createPost);
 
-// postRouter.post("/posts/user/{userId}");
+postRouter.post("/user/{userId}", getPostOfSpecificUser);
 
-postRouter.post("/posts/{postId}", getSinglePost);
+postRouter.post("/{postId}", getSinglePost);
 
 export default postRouter;

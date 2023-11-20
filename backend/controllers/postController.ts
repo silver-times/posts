@@ -34,6 +34,19 @@ export const getSinglePost = async (req: Request, res: Response) => {
   }
 };
 
+export const getPostOfSpecificUser = async (req: RequestExt, res: Response) => {
+  try {
+    const userId = req.payload;
+
+    const workouts = await prisma.post.findMany({
+      where: {},
+    });
+    res.status(200).json(workouts);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 export const createPost = async (req: RequestExt, res: Response) => {
   try {
     const { title, content } = req.body;
