@@ -3,6 +3,7 @@ import { Navbar } from "./components/Navbar";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
+import { PostDetail } from "./pages/PostDetail";
 import { useAuthContext } from "./hooks/useAuthContext";
 
 export const App = () => {
@@ -24,6 +25,7 @@ export const App = () => {
             path="/signup"
             element={!user ? <Signup /> : <Navigate to="/" />}
           />
+          <Route path="/posts/:postId" element={user && <PostDetail />} />
         </Routes>
       </div>
     </BrowserRouter>

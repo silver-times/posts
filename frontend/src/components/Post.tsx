@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 type Post = {
   id: string;
   title: string;
@@ -8,7 +10,16 @@ type Post = {
   updatedAt: string;
 };
 
+const truncateContent = (content: string, limit: number) => {
+  const words = content.split(" ");
+  if (words.length > limit) {
+    return words.slice(0, limit).join(" ") + "...";
+  }
+  return content;
+};
+
 export const Post = ({ post }: { post: Post }) => {
+  const truncatedContent = truncateContent(post?.content || "", 50);
   return (
     <div className="card w-full bg-primary text-primary-content">
       <div className="card-body">
@@ -17,10 +28,12 @@ export const Post = ({ post }: { post: Post }) => {
           By <span className="font-bold">Author</span> on{" "}
           {new Date(post?.createdAt).toLocaleDateString()}
         </p>
-        <p className="text-2xl">{post?.content}</p>
+        <p className="text-2xl">{truncatedContent}</p>
 
         <div className="card-actions justify-end">
-          <button className="btn">Read more</button>
+          <Link to={`/posts/${post?.id}`}>
+            <button className="btn">Read more</button>
+          </Link>
         </div>
       </div>
     </div>
