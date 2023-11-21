@@ -40,8 +40,8 @@ export const PostForm: React.FC = () => {
       setError(json.error);
       return;
     }
-    console.log("created post", json);
-    setPosts((prev) => [json.post, ...prev]);
+
+    setPosts((prev) => [json, ...prev]);
     setInputPost({ title: "", content: "" });
     setError(null);
   };
@@ -72,7 +72,7 @@ export const PostForm: React.FC = () => {
 
       <button
         type="submit"
-        className="my-4 block w-full px-4 py-4 bg-secondary hover:bg-primary border-2 border-heading rounded-lg text-2xl text-white "
+        className="my-4 block w-full px-4 py-4 bg-primary hover:bg-primary border-2 border-heading rounded-lg text-2xl text-white "
       >
         Post
       </button>

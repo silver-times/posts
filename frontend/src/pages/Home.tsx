@@ -23,6 +23,7 @@ export const Home = () => {
           return;
         }
 
+        console.log(data);
         setPosts(data);
       } catch (err) {
         console.log(err);

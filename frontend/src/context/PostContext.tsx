@@ -6,6 +6,8 @@ type Post = {
   content: string;
   published: boolean;
   authorId: string;
+  authorFirstName: string;
+  authorLastName: string;
   createdAt: string;
   updatedAt: string;
 };

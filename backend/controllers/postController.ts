@@ -22,6 +22,7 @@ export const createPost = async (req: RequestExt, res: Response) => {
         authorId,
       },
     });
+
     res.status(201).json(createdPost);
   } catch (error) {
     console.error(error);
