@@ -11,10 +11,12 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="p-5 bg-[#BFDB38]">
+    <nav className="p-5 bg-[#BFDB38] text-black ">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/">
-          <h1 className="text-6xl font-extralight">💪🏻workouts</h1>
+          <h1 className="text-6xl font-extralight text-black hover:text-gray-200">
+            POSTS
+          </h1>
         </Link>
         <div className="flex gap-5">
           {user ? (
@@ -27,10 +29,10 @@ export const Navbar = () => {
           ) : (
             <>
               <Link to="/login">
-                <p className="text-xl font-bold">Login</p>
+                <p className="text-xl font-bold hover:text-gray-200">Login</p>
               </Link>
               <Link to="/signup">
-                <p className="text-xl font-bold">Signup</p>
+                <p className="text-xl font-bold hover:text-gray-200">Signup</p>
               </Link>
             </>
           )}

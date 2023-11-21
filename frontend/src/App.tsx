@@ -11,7 +11,7 @@ export const App = () => {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={user ? <Home /> : <Navigate to="/signup" />} />
+        <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
         <Route
           path="/login"
           element={!user ? <Login /> : <Navigate to="/" />}

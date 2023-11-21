@@ -84,7 +84,7 @@ export const Signup = () => {
               onClick={handleSubmit}
               className="my-4 block w-full px-4 py-4 bg-primary hover:bg-heading border-2 hover:text-primary rounded-lg text-2xl text-white "
             >
-              Sign up
+              Signup
             </button>
             {error && <p className="text-warning">{error}</p>}
           </div>
