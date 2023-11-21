@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
+import SignupImage from "../assets/images/signup.png";
 
 export const Signup = () => {
   const [formData, setFormData] = useState({
@@ -29,7 +30,10 @@ export const Signup = () => {
   return (
     <div className="py-16">
       <div className="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
-        <div className="hidden lg:block lg:w-1/2 bg-cover "></div>
+        <div
+          className="hidden lg:block lg:w-[60%] bg-cover "
+          style={{ backgroundImage: `url(${SignupImage})` }}
+        ></div>
         <div className="w-full p-8 lg:w-1/2">
           <h2 className="text-2xl font-semibold text-gray-700 text-center">
             POSTS
@@ -98,12 +102,12 @@ export const Signup = () => {
           <div className="mt-8">
             <button
               onClick={handleSubmit}
-              className="my-4 block w-full px-4 py-4 bg-primary hover:bg-heading border-2 hover:text-primary rounded-lg text-2xl text-white "
+              className="my-4 block w-full px-4 py-4 bg-primary hover:bg-black border-2 hover:text-white rounded-lg text-2xl text-white "
             >
               Signup
             </button>
             {error && (
-              <p className="text-warning text-xl font-bold uppercase">
+              <p className=" alert alert-error text-sm font-bold uppercase">
                 {error}
               </p>
             )}
@@ -111,7 +115,7 @@ export const Signup = () => {
           <div className="mt-4 flex items-center justify-between">
             <span className="border-b w-1/5 md:w-1/4"></span>
             <a href="/login" className="text-xs text-gray-500 uppercase">
-              or login
+              or login here
             </a>
             <span className="border-b w-1/5 md:w-1/4"></span>
           </div>
