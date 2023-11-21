@@ -23,7 +23,7 @@ export const useSignup = () => {
 
     const data = await response.json();
 
-    console.log(data);
+    console.log(data.user);
 
     if (!response.ok) {
       setError(data.message);
@@ -31,6 +31,7 @@ export const useSignup = () => {
       return;
     }
 
+    localStorage.setItem("user", JSON.stringify(data.user));
     setUser(data.user);
     setIsLoading(false);
   };

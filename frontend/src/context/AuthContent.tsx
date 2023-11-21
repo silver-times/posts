@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 type User = {
   id: string;
@@ -28,6 +28,14 @@ interface ChildrenProps {
 
 const AuthContextProvider: React.FC<ChildrenProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const userJSON = localStorage.getItem("user");
+
+    if (userJSON) {
+      setUser(JSON.parse(userJSON!));
+    }
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
