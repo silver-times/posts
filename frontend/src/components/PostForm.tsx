@@ -40,6 +40,7 @@ export const PostForm: React.FC = () => {
       setError(json.error);
       return;
     }
+    console.log("created post", json);
     setPosts((prev) => [json.post, ...prev]);
     setInputPost({ title: "", content: "" });
     setError(null);

@@ -22,7 +22,6 @@ export const createPost = async (req: RequestExt, res: Response) => {
         authorId,
       },
     });
-    console.log("createdPost", createdPost);
     res.status(201).json(createdPost);
   } catch (error) {
     console.error(error);

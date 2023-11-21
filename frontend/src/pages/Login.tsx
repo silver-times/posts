@@ -60,7 +60,11 @@ export const Login = () => {
             >
               Login
             </button>
-            {error && <p className="text-warning">{error}</p>}
+            {error && (
+              <p className="text-warning text-xl font-bold uppercase">
+                {error}
+              </p>
+            )}
           </div>
           <div className="mt-4 flex items-center justify-between">
             <span className="border-b w-1/5 md:w-1/4"></span>

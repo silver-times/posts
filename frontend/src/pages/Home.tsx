@@ -17,7 +17,6 @@ export const Home = () => {
           },
         });
         const data = await res.json();
-        console.log(data);
 
         if (!res.ok) {
           console.log("Error in fetching posts");
@@ -31,14 +30,14 @@ export const Home = () => {
     };
 
     fetchPosts();
-  }, [user]);
+  }, [user, setPosts]);
 
   return (
     <div className="flex container mx-auto gap-8">
       <div className="w-3/4 flex flex-col mt-8">
-        {posts &&
+        {posts.length > 0 &&
           posts?.map((post) => (
-            <span key={post.id} className="mb-8">
+            <span key={post?.id} className="mb-8">
               <Post post={post} />
             </span>
           ))}
