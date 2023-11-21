@@ -33,7 +33,7 @@ export const Home = () => {
   }, [user]);
 
   return (
-    <div className="flex container mx-auto gap-8 h-full">
+    <div className="flex container mx-auto gap-8">
       <div className="w-3/4 flex flex-col mt-8">
         {posts &&
           posts.map((post) => (
