@@ -5,15 +5,13 @@ type RequestExt = Request & { payload?: { id: string; email: string } };
 
 export const createPost = async (req: RequestExt, res: Response) => {
   try {
-    const { title, content } = req.body;
+    const { title, content, authorId } = req.body;
 
     if (!title || !content) {
       return res.status(400).json({ error: "Please fill all fields" });
     }
-    console.log(req.payload?.id);
-    const userId = req.payload?.id;
 
-    if (!userId) {
+    if (!authorId) {
       return res.status(401).json({ error: "User not authenticated" });
     }
 
@@ -21,10 +19,10 @@ export const createPost = async (req: RequestExt, res: Response) => {
       data: {
         title,
         content,
-        authorId: userId,
+        authorId,
       },
     });
-
+    console.log("createdPost", createdPost);
     res.status(201).json(createdPost);
   } catch (error) {
     console.error(error);

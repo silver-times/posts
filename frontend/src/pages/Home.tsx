@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { usePostContext } from "../hooks/usePostContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Post } from "../components/Post";
+import { PostForm } from "../components/PostForm";
 
 export const Home = () => {
   const { posts, setPosts } = usePostContext();
@@ -36,13 +37,15 @@ export const Home = () => {
     <div className="flex container mx-auto gap-8">
       <div className="w-3/4 flex flex-col mt-8">
         {posts &&
-          posts.map((post) => (
+          posts?.map((post) => (
             <span key={post.id} className="mb-8">
               <Post post={post} />
             </span>
           ))}
       </div>
-      <div className="w-1/4">{/* <PostForm /> */}</div>
+      <div className="w-1/4">
+        <PostForm />
+      </div>
     </div>
   );
 };
