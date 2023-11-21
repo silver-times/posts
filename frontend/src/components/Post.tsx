@@ -6,6 +6,10 @@ type Post = {
   content: string;
   published: boolean;
   authorId: string;
+  author: {
+    firstName: string;
+    lastName: string;
+  };
   createdAt: string;
   updatedAt: string;
 };
@@ -25,8 +29,11 @@ export const Post = ({ post }: { post: Post }) => {
       <div className="card-body">
         <h2 className="card-title text-5xl">{post?.title}</h2>
         <p className="text-lg">
-          By <span className="font-bold">Author</span> on{" "}
-          {new Date(post?.createdAt).toLocaleDateString()}
+          By{" "}
+          <span className="font-bold">
+            {post.author?.firstName} {post.author?.lastName}
+          </span>{" "}
+          on {new Date(post?.createdAt).toLocaleDateString()}
         </p>
         <p className="text-2xl">{truncatedContent}</p>
 
