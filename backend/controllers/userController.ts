@@ -85,7 +85,7 @@ export const login = async (req: Request, res: Response) => {
       return res.status(401).json({ error: "Invalid credentials" });
     }
     const accessToken = generateAccessToken(user);
-    res.status(201).json({ user, accessToken });
+    res.status(201).json({ user });
   } catch (error) {
     res.status(500).json({ error: "Failed to authenticate user during Login" });
   }
