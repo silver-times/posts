@@ -14,25 +14,28 @@ export const Navbar = () => {
     <nav className="p-5 bg-[#BFDB38] text-black ">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/">
-          <h1 className="text-6xl font-extralight text-black hover:text-gray-200">
-            POSTS
+          <h1 className="text-6xl font-extralight text-black hover:text-gray-500">
+            posts...
           </h1>
         </Link>
         <div className="flex gap-5">
           {user ? (
             <>
               <p className="text-xl font-bold">Hi, {user.firstName} 👋🏻</p>
-              <button onClick={handleClick} className="text-xl font-bold">
+              <button
+                onClick={handleClick}
+                className="text-xl font-bold hover:text-gray-500"
+              >
                 Signout
               </button>
             </>
           ) : (
             <>
               <Link to="/login">
-                <p className="text-xl font-bold hover:text-gray-200">Login</p>
+                <p className="text-xl font-bold hover:text-gray-500">Login</p>
               </Link>
               <Link to="/signup">
-                <p className="text-xl font-bold hover:text-gray-200">Signup</p>
+                <p className="text-xl font-bold hover:text-gray-500">Signup</p>
               </Link>
             </>
           )}

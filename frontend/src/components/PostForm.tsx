@@ -58,7 +58,7 @@ export const PostForm: React.FC = () => {
         name="title"
         value={inputPost.title}
         onChange={handleChange}
-        className="my-4 block w-full px-4 py-4 bg-white border-2 border-heading rounded-lg text-xl placeholder-primary focus:outline-none focus:border-heading focus:ring-1 focus:ring-heading invalid:border-warning invalid:text-warning focus:invalid:border-warning focus:invalid:ring-warning "
+        className="my-4 block w-full px-4 py-4 bg-white text-black border-2 border-heading rounded-lg text-xl placeholder-black focus:outline-none focus:border-heading focus:ring-1 focus:ring-heading invalid:border-warning invalid:text-warning focus:invalid:border-warning focus:invalid:ring-warning "
       />
 
       <textarea
@@ -67,12 +67,12 @@ export const PostForm: React.FC = () => {
         value={inputPost.content}
         onChange={handleChange}
         rows={10}
-        className="my-4 block w-full px-4 py-4 bg-white border-2 border-heading rounded-lg text-xl placeholder-primary focus:outline-none focus:border-heading focus:ring-1 focus:ring-heading invalid:border-warning invalid:text-warning focus:invalid:border-warning focus:invalid:ring-warning "
+        className="my-4 block w-full px-4 py-4 bg-white text-black border-2 border-heading rounded-lg text-xl placeholder-black focus:outline-none focus:border-heading focus:ring-1 focus:ring-heading invalid:border-warning invalid:text-warning focus:invalid:border-warning focus:invalid:ring-warning "
       />
 
       <button
         type="submit"
-        className="my-4 block w-full px-4 py-4 bg-primary hover:bg-primary border-2 border-heading rounded-lg text-2xl text-white "
+        className="my-4 block w-full px-4 py-4 bg-primary text-black hover:bg-black hover:text-white border-2 border-heading rounded-lg text-2xl font-medium"
       >
         Post
       </button>

@@ -24,7 +24,7 @@ export const Post = ({ post }: { post: Post }) => {
         <p className="text-lg">
           By{" "}
           <Link to={`/posts/user/${post.authorId}`}>
-            <span className="font-bold">
+            <span className="font-bold hover:text-white">
               {post.author?.firstName} {post.author?.lastName}
             </span>{" "}
           </Link>
@@ -34,7 +34,9 @@ export const Post = ({ post }: { post: Post }) => {
 
         <div className="card-actions justify-end">
           <Link to={`/posts/${post?.id}`}>
-            <button className="btn">Read more</button>
+            <button className="btn hover:text-white hover:bg-black">
+              Read more
+            </button>
           </Link>
         </div>
       </div>

@@ -54,12 +54,18 @@ export const PostDetail = () => {
       <div className="card-body">
         <h2 className="card-title text-5xl">{post?.title}</h2>
         <p className="text-lg">
-          By <span className="font-bold">{userName}</span> on{" "}
-          {new Date(post?.createdAt).toLocaleDateString()}
+          By{" "}
+          <Link to={`/posts/user/${post.authorId}`}>
+            <span className="font-bold hover:text-white">{userName}</span>
+          </Link>{" "}
+          {""}
+          on {new Date(post?.createdAt).toLocaleDateString()}
         </p>
         <p className="text-2xl">{post?.content}</p>
         <Link to={"/"}>
-          <button className="btn w-36 mt-10">Go home</button>
+          <button className="btn w-36 mt-10 hover:text-white hover:bg-black">
+            Go home
+          </button>
         </Link>
       </div>
     </div>

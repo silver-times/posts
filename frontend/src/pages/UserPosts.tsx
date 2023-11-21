@@ -71,7 +71,9 @@ export const UserPosts = () => {
             </p>
             <p className="text-xl">{truncateContent(post.content || "", 50)}</p>
             <Link to={`/posts/${post.id}`}>
-              <button className="btn w-36 mt-2">Read more</button>
+              <button className="btn w-36 mt-2 hover:text-white hover:bg-black">
+                Read more
+              </button>
             </Link>
           </div>
         </div>
