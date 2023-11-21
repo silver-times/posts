@@ -61,6 +61,14 @@ export const getSinglePost = async (req: Request, res: Response) => {
       where: {
         id: postId,
       },
+      include: {
+        author: {
+          select: {
+            firstName: true,
+            lastName: true,
+          },
+        },
+      },
     });
 
     if (!post) {
@@ -85,6 +93,14 @@ export const getPostOfSpecificUser = async (req: Request, res: Response) => {
     const userPosts = await prisma.post.findMany({
       where: {
         authorId: userId,
+      },
+      include: {
+        author: {
+          select: {
+            firstName: true,
+            lastName: true,
+          },
+        },
       },
     });
 

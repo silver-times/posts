@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { truncateContent } from "../utils/truncateContent";
 
 type Post = {
   id: string;
@@ -14,14 +15,6 @@ type Post = {
   updatedAt: string;
 };
 
-const truncateContent = (content: string, limit: number) => {
-  const words = content.split(" ");
-  if (words.length > limit) {
-    return words.slice(0, limit).join(" ") + "...";
-  }
-  return content;
-};
-
 export const Post = ({ post }: { post: Post }) => {
   const truncatedContent = truncateContent(post?.content || "", 50);
   return (
@@ -30,9 +23,11 @@ export const Post = ({ post }: { post: Post }) => {
         <h2 className="card-title text-5xl">{post?.title}</h2>
         <p className="text-lg">
           By{" "}
-          <span className="font-bold">
-            {post.author?.firstName} {post.author?.lastName}
-          </span>{" "}
+          <Link to={`/posts/user/${post.authorId}`}>
+            <span className="font-bold">
+              {post.author?.firstName} {post.author?.lastName}
+            </span>{" "}
+          </Link>
           on {new Date(post?.createdAt).toLocaleDateString()}
         </p>
         <p className="text-2xl">{truncatedContent}</p>

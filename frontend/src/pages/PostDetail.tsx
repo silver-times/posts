@@ -17,6 +17,7 @@ export const PostDetail = () => {
   const { postId } = useParams();
   const { user } = useAuthContext();
   const [post, setPost] = useState<Post | null>(null);
+  const [userName, setUserName] = useState<string>("");
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -34,6 +35,7 @@ export const PostDetail = () => {
           return;
         }
 
+        setUserName(data.author.firstName + " " + data.author.lastName);
         setPost(data);
       } catch (err) {
         console.log(err);
@@ -52,12 +54,12 @@ export const PostDetail = () => {
       <div className="card-body">
         <h2 className="card-title text-5xl">{post?.title}</h2>
         <p className="text-lg">
-          By <span className="font-bold">Author</span> on{" "}
+          By <span className="font-bold">{userName}</span> on{" "}
           {new Date(post?.createdAt).toLocaleDateString()}
         </p>
         <p className="text-2xl">{post?.content}</p>
         <Link to={"/"}>
-          <button className="btn w-36 mt-10">Go back</button>
+          <button className="btn w-36 mt-10">Go home</button>
         </Link>
       </div>
     </div>
