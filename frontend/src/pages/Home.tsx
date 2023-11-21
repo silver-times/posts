@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { usePostContext } from "../hooks/usePostContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Post } from "../components/Post";
@@ -7,6 +7,7 @@ import { PostForm } from "../components/PostForm";
 export const Home = () => {
   const { posts, setPosts } = usePostContext();
   const { user } = useAuthContext();
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -31,17 +32,35 @@ export const Home = () => {
     };
 
     fetchPosts();
-  }, [user, setPosts]);
+  }, [user, setPosts, searchTerm]);
+
+  const filteredPosts = posts.filter(
+    (post) =>
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.content.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="flex container mx-auto gap-8">
       <div className="w-3/4 flex flex-col mt-8">
-        {posts.length > 0 &&
-          posts?.map((post) => (
+        <div className="mb-4">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search among posts or titles..."
+            className="input input-bordered w-full"
+          />
+        </div>
+        {filteredPosts.length > 0 ? (
+          filteredPosts?.map((post) => (
             <span key={post?.id} className="mb-8">
               <Post post={post} />
             </span>
-          ))}
+          ))
+        ) : (
+          <div className="text-center text-2xl">Sorry, no posts found!</div>
+        )}
       </div>
       <div className="w-1/4">
         <PostForm />
