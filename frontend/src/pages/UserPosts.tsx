@@ -2,26 +2,13 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Link, useParams } from "react-router-dom";
 import { truncateContent } from "../utils/truncateContent";
-
-type Post = {
-  id: string;
-  title: string;
-  content: string;
-  published: boolean;
-  author: {
-    id: string;
-    firstName: string;
-    lastName: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
+import type { Post } from "../types/index";
 
 export const UserPosts = () => {
-  const [userPosts, setUserPosts] = useState<Post[] | null>(null);
-  const [userName, setUserName] = useState<string>("");
-  const { user } = useAuthContext();
   const { userId } = useParams();
+  const { user } = useAuthContext();
+  const [userName, setUserName] = useState<string>("");
+  const [userPosts, setUserPosts] = useState<Post[] | null>(null);
 
   useEffect(() => {
     const fetchUserPosts = async () => {
@@ -55,9 +42,9 @@ export const UserPosts = () => {
   }
 
   return (
-    <div className="container">
-      <h1 className="text-4xl text-center mt-4 mb-4">
-        All posts by {userName}!
+    <>
+      <h1 className="text-4xl text-center my-16 ">
+        Here's all the post by {userName}.
       </h1>
       {userPosts.map((post) => (
         <div
@@ -78,6 +65,6 @@ export const UserPosts = () => {
           </div>
         </div>
       ))}
-    </div>
+    </>
   );
 };

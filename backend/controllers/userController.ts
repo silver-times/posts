@@ -29,6 +29,9 @@ export const signup = async (req: Request, res: Response) => {
   const { email, firstName, lastName, password } = req.body;
   let user;
 
+  if (!email || !firstName || !lastName || !password)
+    return res.status(400).json({ error: "Please fill all fields" });
+
   try {
     const existingUser = await prisma.user.findUnique({
       where: {
@@ -82,7 +85,7 @@ export const login = async (req: Request, res: Response) => {
     }
     const matchPassword = await compare(password, user.password);
     if (!matchPassword) {
-      return res.status(401).json({ error: "Invalid credentials" });
+      return res.status(401).json({ error: "Invalid username or password" });
     }
     const accessToken = generateAccessToken(user);
     res.status(201).json({ user });

@@ -26,8 +26,14 @@ export const App = () => {
             path="/signup"
             element={!user ? <Signup /> : <Navigate to="/" />}
           />
-          <Route path="/posts/:postId" element={user && <PostDetail />} />
-          <Route path="/posts/user/:userId" element={user && <UserPosts />} />
+          <Route
+            path="/posts/:postId"
+            element={user ? <PostDetail /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/posts/user/:userId"
+            element={user ? <UserPosts /> : <Navigate to="/login" />}
+          />
         </Routes>
       </div>
     </BrowserRouter>

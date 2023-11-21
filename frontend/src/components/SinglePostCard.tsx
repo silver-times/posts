@@ -1,21 +1,8 @@
 import { Link } from "react-router-dom";
+import type { Post } from "../types/index";
 import { truncateContent } from "../utils/truncateContent";
 
-type Post = {
-  id: string;
-  title: string;
-  content: string;
-  published: boolean;
-  authorId: string;
-  author: {
-    firstName: string;
-    lastName: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export const Post = ({ post }: { post: Post }) => {
+export const SinglePostCard = ({ post }: { post: Post }) => {
   const truncatedContent = truncateContent(post?.content || "", 50);
   return (
     <div className="card w-full bg-primary text-primary-content">

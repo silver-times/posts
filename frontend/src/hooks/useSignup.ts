@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 
 export const useSignup = () => {
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const { setUser } = useAuthContext();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const signup = async (
     email: string,
@@ -23,10 +23,8 @@ export const useSignup = () => {
 
     const data = await response.json();
 
-    console.log(data.user);
-
     if (!response.ok) {
-      setError(data.message);
+      setError(data.error);
       setIsLoading(false);
       return;
     }

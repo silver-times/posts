@@ -2,14 +2,28 @@ import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
 
 export const Signup = () => {
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+  });
   const { signup, error } = useSignup();
 
+  const handleChange = (field: string, value: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  };
+
   const handleSubmit = async () => {
-    await signup(email, firstName, lastName, password);
+    await signup(
+      formData.email,
+      formData.firstName,
+      formData.lastName,
+      formData.password
+    );
   };
 
   return (
@@ -35,9 +49,9 @@ export const Signup = () => {
             </label>
             <input
               type="email"
-              value={email}
+              value={formData.email}
               placeholder="Email"
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={(event) => handleChange("email", event.target.value)}
               className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
             />
           </div>
@@ -47,9 +61,11 @@ export const Signup = () => {
             </label>
             <input
               type="text"
-              value={firstName}
+              value={formData.firstName}
               placeholder="First name"
-              onChange={(event) => setFirstName(event.target.value)}
+              onChange={(event) =>
+                handleChange("firstName", event.target.value)
+              }
               className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
             />
           </div>
@@ -59,9 +75,9 @@ export const Signup = () => {
             </label>
             <input
               type="text"
-              value={lastName}
+              value={formData.lastName}
               placeholder="Last name"
-              onChange={(event) => setLastName(event.target.value)}
+              onChange={(event) => handleChange("lastName", event.target.value)}
               className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
             />
           </div>
@@ -73,9 +89,9 @@ export const Signup = () => {
             </div>
             <input
               type="password"
-              value={password}
+              value={formData.password}
               placeholder="Password"
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={(event) => handleChange("password", event.target.value)}
               className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
             />
           </div>
@@ -86,7 +102,11 @@ export const Signup = () => {
             >
               Signup
             </button>
-            {error && <p className="text-warning">{error}</p>}
+            {error && (
+              <p className="text-warning text-xl font-bold uppercase">
+                {error}
+              </p>
+            )}
           </div>
           <div className="mt-4 flex items-center justify-between">
             <span className="border-b w-1/5 md:w-1/4"></span>

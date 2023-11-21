@@ -1,17 +1,13 @@
 import React, { useState } from "react";
+import type { PostInput } from "../types/index";
 import { usePostContext } from "../hooks/usePostContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
-type InputPost = {
-  title: string;
-  content: string;
-};
-
 export const PostForm: React.FC = () => {
-  const { setPosts } = usePostContext();
   const { user } = useAuthContext();
+  const { setPosts } = usePostContext();
   const [error, setError] = useState<string | null>(null);
-  const [inputPost, setInputPost] = useState<InputPost>({
+  const [inputPost, setInputPost] = useState<PostInput>({
     title: "",
     content: "",
   });
@@ -51,22 +47,21 @@ export const PostForm: React.FC = () => {
       <h3 className="font-bold uppercas text-3xl text-white text-center mt-5">
         Add a new post
       </h3>
-
       <input
         type="text"
-        placeholder="Title"
         name="title"
+        placeholder="Title"
         value={inputPost.title}
         onChange={handleChange}
         className="my-4 block w-full px-4 py-4 bg-white text-black border-2 border-heading rounded-lg text-xl placeholder-black focus:outline-none focus:border-heading focus:ring-1 focus:ring-heading invalid:border-warning invalid:text-warning focus:invalid:border-warning focus:invalid:ring-warning "
       />
 
       <textarea
-        placeholder="write your content here..."
+        rows={10}
         name="content"
         value={inputPost.content}
         onChange={handleChange}
-        rows={10}
+        placeholder="express yourself..."
         className="my-4 block w-full px-4 py-4 bg-white text-black border-2 border-heading rounded-lg text-xl placeholder-black focus:outline-none focus:border-heading focus:ring-1 focus:ring-heading invalid:border-warning invalid:text-warning focus:invalid:border-warning focus:invalid:ring-warning "
       />
 
@@ -76,7 +71,9 @@ export const PostForm: React.FC = () => {
       >
         Post
       </button>
-      {error && <p className="text-warning">{error}</p>}
+      {error && (
+        <p className="text-warning text-xl font-bold uppercase">{error}</p>
+      )}
     </form>
   );
 };

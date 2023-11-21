@@ -2,12 +2,21 @@ import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const { login, error } = useLogin();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (field: string, value: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  };
 
   const handleSubmit = async () => {
-    await login(email, password);
+    await login(formData.email, formData.password);
   };
 
   return (
@@ -33,9 +42,9 @@ export const Login = () => {
             </label>
             <input
               type="email"
-              value={email}
+              value={formData.email}
               placeholder="Email"
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={(event) => handleChange("email", event.target.value)}
               className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
             />
           </div>
@@ -47,9 +56,9 @@ export const Login = () => {
             </div>
             <input
               type="password"
-              value={password}
+              value={formData.password}
               placeholder="Password"
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={(event) => handleChange("password", event.target.value)}
               className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
             />
           </div>

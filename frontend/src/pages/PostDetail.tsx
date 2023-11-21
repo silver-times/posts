@@ -1,17 +1,8 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { Link } from "react-router-dom";
-
-type Post = {
-  id: string;
-  title: string;
-  content: string;
-  published: boolean;
-  authorId: string;
-  createdAt: string;
-  updatedAt: string;
-};
+import type { Post } from "../types/index";
 
 export const PostDetail = () => {
   const { postId } = useParams();

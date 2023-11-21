@@ -1,32 +1,10 @@
 import React, { createContext, useState } from "react";
-
-type Post = {
-  id: string;
-  title: string;
-  content: string;
-  published: boolean;
-  authorId: string;
-  author: {
-    firstName: string;
-    lastName: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-type PostContextType = {
-  posts: Post[];
-  setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
-};
+import type { Post, PostContextType, ChildrenProps } from "../types/index";
 
 export const PostContext = createContext<PostContextType>({
   posts: [],
   setPosts: () => {},
 });
-
-interface ChildrenProps {
-  children: React.ReactNode;
-}
 
 const PostContextProvider: React.FC<ChildrenProps> = ({ children }) => {
   const [posts, setPosts] = useState<Post[]>([]);
