@@ -5,6 +5,8 @@ import {
   getSinglePost,
   getPostOfSpecificUser,
   createPost,
+  updatePost,
+  deletePost,
 } from "../controllers/postController";
 
 const postRouter: Router = express.Router();
@@ -15,8 +17,12 @@ postRouter.get("/", getAllPosts);
 
 postRouter.post("/", createPost);
 
-postRouter.post("/user/:userId", getPostOfSpecificUser);
+postRouter.get("/user/:userId", getPostOfSpecificUser);
 
-postRouter.post("/:postId", getSinglePost);
+postRouter.get("/:postId", getSinglePost);
+
+postRouter.put("/:postId", updatePost);
+
+postRouter.delete("/:postId", deletePost);
 
 export default postRouter;

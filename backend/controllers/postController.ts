@@ -110,3 +110,49 @@ export const getPostOfSpecificUser = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const updatePost = async (req: Request, res: Response) => {
+  try {
+    const postId = req.params.postId;
+    const updatedPostData = req.body;
+
+    if (!postId || !updatedPostData) {
+      return res
+        .status(400)
+        .json({ error: "Post ID and updated data are required" });
+    }
+
+    const updatedPost = await prisma.post.update({
+      where: {
+        id: postId,
+      },
+      data: updatedPostData,
+    });
+
+    res.json(updatedPost);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export const deletePost = async (req: Request, res: Response) => {
+  try {
+    const postId = req.params.postId;
+
+    if (!postId) {
+      return res.status(400).json({ error: "Post ID is required" });
+    }
+
+    await prisma.post.delete({
+      where: {
+        id: postId,
+      },
+    });
+
+    res.json({ message: "Post deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
