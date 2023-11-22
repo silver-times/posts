@@ -17,11 +17,13 @@ ReactPosts is a Fullstack blog application with CRUD operations. The frontend is
 
 ## Installation
 
-Simply clone it and run the following command:
+1. Simply clone it and run the following command:
 
 ```bash
   cd posts && cat backend/.env.local > backend/.env && pnpm start
 ```
+
+2. Open your web browser and navigate to http://localhost:5173 to access the application.
 
 ## Tech Stack
 
