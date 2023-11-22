@@ -14,7 +14,6 @@ export const PostDetail = () => {
     const fetchPost = async () => {
       try {
         const res = await fetch(`http://localhost:5000/posts/${postId}`, {
-          method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user?.accessToken}`,

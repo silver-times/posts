@@ -14,7 +14,6 @@ export const UserPosts = () => {
     const fetchUserPosts = async () => {
       try {
         const res = await fetch(`http://localhost:5000/posts/user/${userId}`, {
-          method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user?.accessToken}`,
