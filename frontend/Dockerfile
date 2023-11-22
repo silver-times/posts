@@ -1,16 +1,16 @@
-ARG NODE_VERSION=20.2.0
-ARG PNPM_VERSION=8.6.5
+# ARG NODE_VERSION=20.2.0
+# ARG PNPM_VERSION=8.6.5
 
-FROM node:${NODE_VERSION}-alpine as base
+# FROM node:${NODE_VERSION}-alpine as base
 
-RUN npm install -g pnpm@${PNPM_VERSION}
+# RUN npm install -g pnpm@${PNPM_VERSION}
 
-WORKDIR /app
+# WORKDIR /app
 
-COPY package*.json ./
+# COPY package*.json ./
 
-RUN pnpm i
+# RUN pnpm i
 
-COPY . .
+# COPY . .
 
-CMD ["pnpm", "dev"]
+# CMD ["pnpm", "dev"]
