@@ -13,13 +13,11 @@ export const Navbar = () => {
   return (
     <nav className="p-5 bg-primary text-black ">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="flex hover:text-white">
+        <Link to="/" className="flex hover:-translate-y-0.5">
           <span className="material-symbols-outlined text-6xl">
             contract_edit
           </span>
-          <h1 className="text-6xl text-black hover:text-white ">
-            ReactPosts...
-          </h1>
+          <h1 className="text-6xl text-black">ReactPosts</h1>
         </Link>
         <div className="flex gap-5">
           {user ? (

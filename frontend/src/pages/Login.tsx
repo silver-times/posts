@@ -34,9 +34,9 @@ export const Login = () => {
         ></div>
         <div className="w-full p-8 lg:w-1/2">
           <h2 className="text-2xl font-semibold text-gray-700 text-center">
-            POSTS
+            ReactPosts
           </h2>
-          <p className="text-lg text-gray-600 text-center">Welcome back!</p>
+          <p className="text-md text-gray-600 text-center">Welcome back!</p>
 
           <div className="mt-4 flex items-center justify-between">
             <span className="border-b w-1/5 lg:w-1/4"></span>
@@ -74,7 +74,7 @@ export const Login = () => {
           <div className="mt-8">
             <button
               onClick={handleSubmit}
-              className="my-4 block w-full px-4 py-4 bg-black hover:bg-theme border-2 hover:text-white rounded-lg text-2xl text-white "
+              className="my-4 block w-full px-4 py-4 bg-black hover:bg-primary border-0 font-medium hover:text-white rounded-lg text-2xl text-white "
             >
               Login
             </button>
