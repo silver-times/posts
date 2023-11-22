@@ -54,7 +54,6 @@ export const signup = async (req: Request, res: Response) => {
       },
     });
 
-    console.log(user);
     const accessToken = generateAccessToken(user);
     const refreshToken = generateRefreshToken(user);
 
