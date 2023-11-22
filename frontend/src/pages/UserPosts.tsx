@@ -51,8 +51,8 @@ export const UserPosts = () => {
           className="card w-[60%] mx-auto py-4 my-4 bg-primary text-primary-content"
         >
           <div className="card-body">
-            <h3 className="card-title text-2xl">{post.title}</h3>
-            <p className="text-lg">
+            <h3 className="card-title text-3xl">{post.title}</h3>
+            <p className="text-sm">
               on {new Date(post.createdAt).toLocaleDateString()}
             </p>
             <p className="text-xl">{truncateContent(post.content || "", 50)}</p>

@@ -42,7 +42,7 @@ export const SinglePostCard = ({
         ) : (
           <>
             <div className="flex items-center justify-between">
-              <h2 className="card-title text-5xl">{post?.title}</h2>
+              <h2 className="card-title text-3xl">{post?.title}</h2>
               <div className="flex gap-4">
                 {isCurrentUserAuthor && (
                   <>
@@ -63,7 +63,7 @@ export const SinglePostCard = ({
                 )}
               </div>
             </div>
-            <p className="text-lg">
+            <p className="text-sm">
               By{" "}
               <Link to={`/posts/user/${post.authorId}`}>
                 <span className="font-bold hover:text-white">
@@ -72,7 +72,7 @@ export const SinglePostCard = ({
               </Link>
               on {new Date(post?.createdAt).toLocaleDateString()}
             </p>
-            <p className="text-2xl">{truncatedContent}</p>
+            <p className="text-xl">{truncatedContent}</p>
 
             <div className="card-actions justify-end">
               <Link to={`/posts/${post?.id}`}>

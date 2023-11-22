@@ -42,8 +42,8 @@ export const PostDetail = () => {
   return (
     <div className="card w-[80%] mx-auto py-10 my-10 bg-primary text-primary-content">
       <div className="card-body">
-        <h2 className="card-title text-5xl">{post?.title}</h2>
-        <p className="text-lg">
+        <h2 className="card-title text-3xl">{post?.title}</h2>
+        <p className="text-sm">
           By{" "}
           <Link to={`/posts/user/${post.authorId}`}>
             <span className="font-bold hover:text-white">{userName}</span>
@@ -51,7 +51,7 @@ export const PostDetail = () => {
           {""}
           on {new Date(post?.createdAt).toLocaleDateString()}
         </p>
-        <p className="text-2xl">{post?.content}</p>
+        <p className="text-xl">{post?.content}</p>
         <Link to={"/"}>
           <button className="btn w-36 mt-10 border-0 text-white hover:text-black hover:bg-theme">
             Go home
