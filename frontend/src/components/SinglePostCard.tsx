@@ -1,9 +1,28 @@
 import { Link } from "react-router-dom";
 import type { Post } from "../types/index";
+import { useAuthContext } from "../hooks/useAuthContext";
 import { truncateContent } from "../utils/truncateContent";
 
-export const SinglePostCard = ({ post }: { post: Post }) => {
+export const SinglePostCard = ({
+  post,
+  onDelete,
+}: {
+  post: Post;
+  onDelete: (postId: string) => void;
+}) => {
+  const { user } = useAuthContext();
   const truncatedContent = truncateContent(post?.content || "", 50);
+
+  const isCurrentUserAuthor = user?.id === post?.authorId;
+
+  const handleDelete = async () => {
+    try {
+      await onDelete(post.id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="card w-full bg-primary text-primary-content">
       <div className="card-body">
@@ -25,6 +44,23 @@ export const SinglePostCard = ({ post }: { post: Post }) => {
               Read more
             </button>
           </Link>
+
+          {isCurrentUserAuthor && (
+            <>
+              <Link to={`/posts/edit/${post?.id}`}>
+                <button className="btn hover:text-white hover:bg-black">
+                  Edit
+                </button>
+              </Link>
+
+              <button
+                className="btn hover:text-white hover:bg-black"
+                onClick={() => handleDelete()}
+              >
+                Delete
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

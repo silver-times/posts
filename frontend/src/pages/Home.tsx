@@ -3,11 +3,33 @@ import { usePostContext } from "../hooks/usePostContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { SinglePostCard } from "../components/SinglePostCard";
 import { PostForm } from "../components/PostForm";
+import { toast } from "react-toastify";
 
 export const Home = () => {
   const { user } = useAuthContext();
   const { posts, setPosts } = usePostContext();
   const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredPosts = posts.filter(
+    (post) =>
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.content.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleDelete = async (postId: string) => {
+    try {
+      const res = await fetch(`http://localhost:5000/posts/${postId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user?.accessToken}`,
+        },
+      });
+      const json = await res.json();
+      toast.success(json.message);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -20,7 +42,7 @@ export const Home = () => {
         const data = await res.json();
 
         if (!res.ok) {
-          console.log("Error in fetching posts");
+          toast.error("Error in fetching posts");
           return;
         }
 
@@ -31,13 +53,7 @@ export const Home = () => {
     };
 
     fetchPosts();
-  }, [user, setPosts, searchTerm]);
-
-  const filteredPosts = posts.filter(
-    (post) =>
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.content.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  }, [user, setPosts, searchTerm, handleDelete]);
 
   return (
     <div className="flex container mx-auto gap-8">
@@ -57,7 +73,7 @@ export const Home = () => {
         {filteredPosts.length > 0 && user ? (
           filteredPosts?.map((post) => (
             <span key={post?.id} className="mb-8">
-              <SinglePostCard post={post} />
+              <SinglePostCard post={post} onDelete={handleDelete} />
             </span>
           ))
         ) : (
