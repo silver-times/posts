@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { useAuthContext } from "./useAuthContext";
 
 export const useSignup = () => {
@@ -24,9 +25,12 @@ export const useSignup = () => {
     const data = await response.json();
 
     if (!response.ok) {
+      toast.error(data.error);
       setError(data.error);
       setIsLoading(false);
       return;
+    } else {
+      toast.success("Signed up successfully!");
     }
 
     localStorage.setItem("user", JSON.stringify(data.user));

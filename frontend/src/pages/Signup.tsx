@@ -3,13 +3,13 @@ import { useSignup } from "../hooks/useSignup";
 import SignupImage from "../assets/images/signup.png";
 
 export const Signup = () => {
+  const { signup } = useSignup();
   const [formData, setFormData] = useState({
     email: "",
     firstName: "",
     lastName: "",
     password: "",
   });
-  const { signup, error } = useSignup();
 
   const handleChange = (field: string, value: string) => {
     setFormData((prevData) => ({
@@ -19,12 +19,16 @@ export const Signup = () => {
   };
 
   const handleSubmit = async () => {
-    await signup(
-      formData.email,
-      formData.firstName,
-      formData.lastName,
-      formData.password
-    );
+    try {
+      await signup(
+        formData.email,
+        formData.firstName,
+        formData.lastName,
+        formData.password
+      );
+    } catch (error) {
+      console.error("Signup error:", error);
+    }
   };
 
   return (
@@ -106,11 +110,6 @@ export const Signup = () => {
             >
               Signup
             </button>
-            {error && (
-              <p className=" alert alert-error text-sm font-bold uppercase">
-                {error}
-              </p>
-            )}
           </div>
           <div className="mt-4 flex items-center justify-between">
             <span className="border-b w-1/5 md:w-1/4"></span>

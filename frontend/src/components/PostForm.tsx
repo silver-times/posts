@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { toast } from "react-toastify";
 import type { PostInput } from "../types/index";
 import { usePostContext } from "../hooks/usePostContext";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -6,7 +7,6 @@ import { useAuthContext } from "../hooks/useAuthContext";
 export const PostForm: React.FC = () => {
   const { user } = useAuthContext();
   const { setPosts } = usePostContext();
-  const [error, setError] = useState<string | null>(null);
   const [inputPost, setInputPost] = useState<PostInput>({
     title: "",
     content: "",
@@ -33,13 +33,14 @@ export const PostForm: React.FC = () => {
     const json = await res.json();
 
     if (!res.ok) {
-      setError(json.error);
+      toast.error(json.error);
       return;
+    } else {
+      toast.success("Post created successfully!");
     }
 
     setPosts((prev) => [json, ...prev]);
     setInputPost({ title: "", content: "" });
-    setError(null);
   };
 
   return (
@@ -71,9 +72,6 @@ export const PostForm: React.FC = () => {
       >
         Post
       </button>
-      {error && (
-        <p className="text-warning text-xl font-bold uppercase">{error}</p>
-      )}
     </form>
   );
 };

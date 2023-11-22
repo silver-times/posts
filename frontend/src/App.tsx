@@ -6,6 +6,7 @@ import { Signup } from "./pages/Signup";
 import { PostDetail } from "./pages/PostDetail";
 import { UserPosts } from "./pages/UserPosts";
 import { useAuthContext } from "./hooks/useAuthContext";
+import { Toast } from "./components/Toast";
 
 export const App = () => {
   const { user } = useAuthContext();
@@ -13,6 +14,7 @@ export const App = () => {
     <BrowserRouter>
       <Navbar />
       <div className="">
+        <Toast />
         <Routes>
           <Route
             path="/"

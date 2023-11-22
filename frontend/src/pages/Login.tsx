@@ -3,7 +3,8 @@ import { useLogin } from "../hooks/useLogin";
 import LoginImage from "../assets/images/login.png";
 
 export const Login = () => {
-  const { login, error } = useLogin();
+  const { login } = useLogin();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,7 +18,11 @@ export const Login = () => {
   };
 
   const handleSubmit = async () => {
-    await login(formData.email, formData.password);
+    try {
+      await login(formData.email, formData.password);
+    } catch (error) {
+      console.error("Signup error:", error);
+    }
   };
 
   return (
@@ -73,11 +78,6 @@ export const Login = () => {
             >
               Login
             </button>
-            {error && (
-              <p className=" alert alert-error text-sm font-bold uppercase">
-                {error}
-              </p>
-            )}
           </div>
           <div className="mt-4 flex items-center justify-between">
             <span className="border-b w-1/5 md:w-1/4"></span>
