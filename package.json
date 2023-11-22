@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "be": "cd backend && pnpm dev",
-    "fe": "cd frontend && pnpm dev",
+    "start": "pnpm run docker && pnpm run setup & pnpm run dev",
     "docker": "cd backend && docker compose up -d",
-    "dev": "pnpm docker && pnpm fe && pnpm be"
+    "setup": "pnpm run BE & pnpm run FE",
+    "BE": "cd backend && pnpm install && npx prisma generate && pnpm prisma migrate deploy && pnpm dev",
+    "FE": "cd frontend && pnpm install && pnpm dev",
+    "dev": "echo 'Application running successfully ✅!'"
   },
   "keywords": [],
   "author": "",
