@@ -106,7 +106,7 @@ export const Signup = () => {
           <div className="mt-8">
             <button
               onClick={handleSubmit}
-              className="my-4 block w-full px-4 py-4 bg-primary hover:bg-black border-2 hover:text-white rounded-lg text-2xl text-white "
+              className="my-4 block w-full px-4 py-4 bg-black hover:bg-theme border-2 hover:text-white rounded-lg text-2xl text-white "
             >
               Signup
             </button>
@@ -114,7 +114,7 @@ export const Signup = () => {
           <div className="mt-4 flex items-center justify-between">
             <span className="border-b w-1/5 md:w-1/4"></span>
             <a href="/login" className="text-xs text-gray-500 uppercase">
-              or login here
+              or login
             </a>
             <span className="border-b w-1/5 md:w-1/4"></span>
           </div>

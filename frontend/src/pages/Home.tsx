@@ -1,10 +1,10 @@
+import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
+import { PostForm } from "../components/PostForm";
 import { usePostContext } from "../hooks/usePostContext";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { SinglePostCard } from "../components/SinglePostCard";
-import { PostForm } from "../components/PostForm";
-import { toast } from "react-toastify";
 import { usePostActions } from "../hooks/usePostActions";
+import { SinglePostCard } from "../components/SinglePostCard";
 
 export const Home = () => {
   const { user } = useAuthContext();

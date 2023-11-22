@@ -74,7 +74,7 @@ export const Login = () => {
           <div className="mt-8">
             <button
               onClick={handleSubmit}
-              className="my-4 block w-full px-4 py-4 bg-black hover:bg-primary border-2 hover:text-white rounded-lg text-2xl text-white "
+              className="my-4 block w-full px-4 py-4 bg-black hover:bg-theme border-2 hover:text-white rounded-lg text-2xl text-white "
             >
               Login
             </button>

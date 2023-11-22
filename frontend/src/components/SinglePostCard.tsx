@@ -48,7 +48,7 @@ export const SinglePostCard = ({
                   <>
                     <button
                       onClick={() => handleEdit()}
-                      className="material-symbols-outlined bg-white rounded-full p-1 text-black hover:text-white hover:bg-black  cursor-pointer"
+                      className="material-symbols-outlined bg-white rounded-full p-1 text-black hover:text-white hover:bg-theme  cursor-pointer"
                     >
                       Edit
                     </button>
@@ -76,7 +76,7 @@ export const SinglePostCard = ({
 
             <div className="card-actions justify-end">
               <Link to={`/posts/${post?.id}`}>
-                <button className="btn hover:text-white hover:bg-black">
+                <button className="btn text-white hover:text-black border-0 hover:bg-theme">
                   Read more
                 </button>
               </Link>

@@ -53,7 +53,7 @@ export const PostDetail = () => {
         </p>
         <p className="text-2xl">{post?.content}</p>
         <Link to={"/"}>
-          <button className="btn w-36 mt-10 hover:text-white hover:bg-black">
+          <button className="btn w-36 mt-10 border-0 text-white hover:text-black hover:bg-theme">
             Go home
           </button>
         </Link>

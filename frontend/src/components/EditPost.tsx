@@ -52,13 +52,13 @@ export const EditPost = ({
       <div className="flex gap-2">
         <button
           onClick={handleUpdate}
-          className="my-4 block w-1/6 px-4 py-4 bg-primary hover:bg-heading border-2 border-heading rounded-lg text-2xl text-white "
+          className="my-4 block w-1/6 px-4 py-4 bg-theme hover:bg-teal-400 border-0 border-heading rounded-lg text-2xl text-white "
         >
           Update
         </button>
         <button
           onClick={() => setIsEditing(false)}
-          className="my-4 block w-1/6 px-4 py-4 bg-primary hover:bg-heading border-2 border-heading rounded-lg text-2xl text-white "
+          className="my-4 block w-1/6 px-4 py-4 bg-red-800 hover:bg-heading hover:bg-red-700 border-0 rounded-lg text-2xl text-white "
         >
           Cancel
         </button>

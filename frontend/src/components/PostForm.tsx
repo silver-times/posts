@@ -68,9 +68,9 @@ export const PostForm: React.FC = () => {
 
       <button
         type="submit"
-        className="my-4 block w-full px-4 py-4 bg-primary text-black hover:bg-black hover:text-white border-2 border-heading rounded-lg text-2xl font-medium"
+        className="my-4 block w-full px-4 py-4 bg-primary text-black hover:bg-theme hover:text-white border-1 border-heading rounded-lg text-2xl font-medium"
       >
-        Post
+        SUBMIT
       </button>
     </form>
   );

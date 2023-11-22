@@ -11,20 +11,28 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="p-5 bg-[#BFDB38] text-black ">
+    <nav className="p-5 bg-primary text-black ">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/">
-          <h1 className="text-6xl font-extralight text-black hover:text-gray-500">
-            posts...
+        <Link to="/" className="flex hover:text-white">
+          <span className="material-symbols-outlined text-6xl">
+            contract_edit
+          </span>
+          <h1 className="text-6xl text-black hover:text-white ">
+            ReactPosts...
           </h1>
         </Link>
         <div className="flex gap-5">
           {user ? (
             <>
-              <p className="text-xl font-bold">Hi, {user.firstName} 👋🏻</p>
+              <p className="text-xl font-bold">
+                Hi,{" "}
+                {user.firstName.charAt(0).toUpperCase() +
+                  user.firstName.slice(1)}{" "}
+                👋🏻
+              </p>
               <button
                 onClick={handleClick}
-                className="text-xl font-bold hover:text-gray-500"
+                className="text-xl font-bold hover:text-white"
               >
                 Signout
               </button>
@@ -32,10 +40,10 @@ export const Navbar = () => {
           ) : (
             <>
               <Link to="/login">
-                <p className="text-xl font-bold hover:text-gray-500">Login</p>
+                <p className="text-xl font-bold hover:text-white">Login</p>
               </Link>
               <Link to="/signup">
-                <p className="text-xl font-bold hover:text-gray-500">Signup</p>
+                <p className="text-xl font-bold hover:text-white">Signup</p>
               </Link>
             </>
           )}
