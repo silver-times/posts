@@ -4,32 +4,19 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { SinglePostCard } from "../components/SinglePostCard";
 import { PostForm } from "../components/PostForm";
 import { toast } from "react-toastify";
+import { usePostActions } from "../hooks/usePostActions";
 
 export const Home = () => {
   const { user } = useAuthContext();
   const { posts, setPosts } = usePostContext();
   const [searchTerm, setSearchTerm] = useState("");
+  const { handleDelete, handleUpdate } = usePostActions();
 
   const filteredPosts = posts.filter(
     (post) =>
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.content.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const handleDelete = async (postId: string) => {
-    try {
-      const res = await fetch(`http://localhost:5000/posts/${postId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${user?.accessToken}`,
-        },
-      });
-      const json = await res.json();
-      toast.success(json.message);
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -53,7 +40,7 @@ export const Home = () => {
     };
 
     fetchPosts();
-  }, [user, setPosts, searchTerm, handleDelete]);
+  }, [user, setPosts, searchTerm, handleDelete, handleUpdate]);
 
   return (
     <div className="flex container mx-auto gap-8">

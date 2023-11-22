@@ -13,31 +13,26 @@ export const App = () => {
   return (
     <BrowserRouter>
       <Navbar />
-      <div className="">
-        <Toast />
-        <Routes>
-          <Route
-            path="/"
-            element={user ? <Home /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/login"
-            element={!user ? <Login /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/signup"
-            element={!user ? <Signup /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/posts/:postId"
-            element={user ? <PostDetail /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/posts/user/:userId"
-            element={user ? <UserPosts /> : <Navigate to="/login" />}
-          />
-        </Routes>
-      </div>
+      <Toast />
+      <Routes>
+        <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
+        <Route
+          path="/login"
+          element={!user ? <Login /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/signup"
+          element={!user ? <Signup /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/posts/:postId"
+          element={user ? <PostDetail /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/posts/user/:userId"
+          element={user ? <UserPosts /> : <Navigate to="/login" />}
+        />
+      </Routes>
     </BrowserRouter>
   );
 };
