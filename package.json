@@ -1,0 +1,15 @@
+{
+  "name": "posts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "be": "cd backend && pnpm dev",
+    "fe": "cd frontend && pnpm dev",
+    "docker": "cd backend && docker compose up -d",
+    "dev": "pnpm docker && pnpm fe && pnpm be"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

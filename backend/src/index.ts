@@ -11,9 +11,9 @@ app.use(express.json());
 app.use("/auth", userRouter);
 app.use("/posts", postRouter);
 
-app.listen(5000, async () => {
+app.listen(process.env.PORT, async () => {
   try {
-    console.log(`Server running on port 5000`);
+    console.log(`Server running on port ${process.env.PORT}`);
     console.log("Database connected");
   } catch (error) {
     console.log(error);

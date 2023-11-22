@@ -2,9 +2,9 @@
   "name": "posts",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "dev": "nodemon src/index.ts"
+    "dev": "npx nodemon "
   },
   "keywords": [],
   "author": "",
