@@ -22,6 +22,13 @@ export type PostInput = {
   content: string;
 };
 
+export type EditPostProps = {
+  id: string;
+  title: string;
+  content: string;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 export type User = {
   id: string;
   firstName: string;

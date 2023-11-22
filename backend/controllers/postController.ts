@@ -114,19 +114,19 @@ export const getPostOfSpecificUser = async (req: Request, res: Response) => {
 export const updatePost = async (req: Request, res: Response) => {
   try {
     const postId = req.params.postId;
-    const updatedPostData = req.body;
+    const { title, content } = req.body;
 
-    if (!postId || !updatedPostData) {
-      return res
-        .status(400)
-        .json({ error: "Post ID and updated data are required" });
+    if (!postId || !title || !content) {
+      return res.status(400).json({ error: "Please fill all fields" });
     }
-
     const updatedPost = await prisma.post.update({
       where: {
         id: postId,
       },
-      data: updatedPostData,
+      data: {
+        title,
+        content,
+      },
     });
 
     res.json(updatedPost);
